@@ -6,7 +6,7 @@
 # appropriate file in this repo
 
 # Just add any new dotfiles to this list
-DOTFILES=".bashrc .emacs"
+DOTFILES=".bashrc .emacs .tmux.conf"
 DIR=$(pwd)
 DOTFILES_DIR=$DIR/../dotfiles
 
@@ -14,9 +14,19 @@ cd $HOME
 
 for f in $DOTFILES;
 do
-    # If the file already exists in the home directory
-    # then delete it and replace it with our symlink.
-    # If it doesn't already exist, add a symlink to ours
-    rm $f &> /dev/null
+    # If the file already exists in the home directory and it is not already
+    # a symbolic link, then it must be the original dotfile, so we should back
+    # it up as a ".original" file.
+    # Otherwise, if the file exists as a symbolic link, delete it
+    # then add a symlink to our version of the dotfile.
+    if [ -a $f ]
+    then
+	if [ ! -h $f ]
+	then
+	    mv $f $f.original
+	else
+	    rm $f
+	fi
+    fi
     ln -s $DOTFILES_DIR/$f $f
 done

@@ -3,3 +3,4 @@ make
 emacs
 gdb
 valgrind
+tmux
