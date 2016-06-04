@@ -132,3 +132,6 @@ PS1='\[\033[1;32m\]\u@\h\[\033[0m\]:\[\033[1;34m\]\w\[\033[1;35m\]$(__git_ps1)\[
 
 export EDITOR="emacs -nw"
 
+# Aliases
+alias tmux='TERM=xterm-256color tmux'
+alias emacs='emacs -nw'
