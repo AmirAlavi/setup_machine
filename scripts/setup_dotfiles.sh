@@ -6,7 +6,7 @@
 # appropriate file in this repo
 
 # Just add any new dotfiles to this list
-DOTFILES=".bashrc .emacs .tmux.conf"
+DOTFILES=.[^.]*
 DIR=$(pwd)
 DOTFILES_DIR=$DIR/../dotfiles
 
