@@ -5,6 +5,7 @@
 # development
 
 DIR=$(pwd)/../warez_lists
+DOTFILES=$(pwd)/../dotfiles
 
 # Detect platform and set package manager accordingly
 # (must be either Ubuntu or OSX)
@@ -26,7 +27,7 @@ if [ $? -eq 0 ]; then
     fi
     PACKAGE_MANAGER_INSTALL="brew install"
     DEV="$DIR/mac/dev.list"
-    LANG="$DIR/mac/languages.list"    
+    LANG=
 fi
 
 # Install first-party software (installs through package manager)
@@ -46,4 +47,6 @@ done
 cd $HOME
 if [ ! -d "neotree" ]; then
     git clone https://github.com/jaypei/emacs-neotree.git neotree
+    NEO_PATH=$(pwd)/neotree
+    echo "(add-to-list 'load-path \"$NEO_PATH\")" | cat - $DOTFILES/.emacs > $DOTFILES/temp && mv $DOTFILES/temp $DOTFILES/.emacs
 fi
