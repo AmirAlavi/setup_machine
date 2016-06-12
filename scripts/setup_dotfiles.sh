@@ -10,10 +10,11 @@ DOTFILES=.[^.]*
 DIR=$(pwd)
 DOTFILES_DIR=$DIR/../dotfiles
 
-cd $HOME
+cd $DOTFILES_DIR
 
 for f in $DOTFILES;
 do
+    cd $HOME
     # If the file already exists in the home directory and it is not already
     # a symbolic link, then it must be the original dotfile, so we should back
     # it up as a ".original" file.
