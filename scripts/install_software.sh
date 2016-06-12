@@ -4,12 +4,16 @@
 # This script will install all software that I need for
 # development
 
+DIR=$(pwd)/../warez_lists
+
 # Detect platform and set package manager accordingly
 # (must be either Ubuntu or OSX)
 uname -a | grep -i "ubuntu"
 if [ $? -eq 0 ]; then
     # Ubuntu detected
     PACKAGE_MANAGER_INSTALL="sudo apt-get install -y"
+    DEV="$DIR/ubuntu/dev.list"
+    LANG="$DIR/ubuntu/languages.list"
 fi
 
 uname -a | grep -i "darwin"
@@ -19,18 +23,14 @@ if [ $? -eq 0 ]; then
     which brew
     if [ $? -ne 0 ]; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	PACKAGE_MANAGER_INSTALL="brew install"
     fi
-    
+    PACKAGE_MANAGER_INSTALL="brew install"
+    DEV="$DIR/mac/dev.list"
+    LANG="$DIR/mac/languages.list"    
 fi
 
 # Install first-party software (installs through package manager)
-DIR=$(pwd)/../warez_lists
-DEV="$DIR/dev.list"
-LANG="$DIR/languages.list"
 WAREZ_LISTS="$DEV $LANG"
-
-cd $HOME
 for list in $WAREZ_LISTS;
 do
     $PACKAGE_MANAGER_INSTALL $(cat $list)
@@ -47,6 +47,3 @@ cd $HOME
 if [ ! -d "neotree" ]; then
     git clone https://github.com/jaypei/emacs-neotree.git neotree
 fi
-
-
-
