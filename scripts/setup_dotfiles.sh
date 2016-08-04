@@ -6,6 +6,7 @@
 # appropriate file in this repo
 
 # Just add any new dotfiles to this list
+echo "Running setup_dotfiles..."
 DOTFILES=.[^.]*
 DIR=$(pwd)
 DOTFILES_DIR=$DIR/../dotfiles
