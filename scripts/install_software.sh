@@ -16,6 +16,7 @@ if [ $? -eq 0 ]; then
     PACKAGE_MANAGER_INSTALL="sudo apt-get install -y"
     DEV="$DIR/ubuntu/dev.list"
     LANG="$DIR/ubuntu/languages.list"
+    ADMIN="$DIR/ubuntu/admin.list"
 fi
 
 uname -a | grep -i "darwin"
@@ -29,12 +30,12 @@ if [ $? -eq 0 ]; then
     fi
     PACKAGE_MANAGER_INSTALL="brew install"
     DEV="$DIR/mac/dev.list"
-    LANG=
+    ADMIN="$DIR/mac/admin.list"
 fi
 
 # Install first-party software (installs through package manager)
 echo "Installing first-party software..."
-WAREZ_LISTS="$DEV $LANG"
+WAREZ_LISTS="$DEV $LANG $ADMIN"
 for list in $WAREZ_LISTS;
 do
     $PACKAGE_MANAGER_INSTALL $(cat $list)
