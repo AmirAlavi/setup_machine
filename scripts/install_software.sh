@@ -15,7 +15,7 @@ if [ $? -eq 0 ]; then
     echo "Ubuntu detected."
     PACKAGE_MANAGER_INSTALL="sudo apt-get install -y"
     DEV="$DIR/ubuntu/dev.list"
-    LANG="$DIR/ubuntu/languages.list"
+    LANGUAGE="$DIR/ubuntu/languages.list"
     ADMIN="$DIR/ubuntu/admin.list"
 fi
 
@@ -26,6 +26,7 @@ if [ $? -eq 0 ]; then
     # Install Homebrew if not installed
     which brew
     if [ $? -ne 0 ]; then
+	echo "No homebrew detected, installing..."
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     PACKAGE_MANAGER_INSTALL="brew install"
@@ -35,7 +36,7 @@ fi
 
 # Install first-party software (installs through package manager)
 echo "Installing first-party software..."
-WAREZ_LISTS="$DEV $LANG $ADMIN"
+WAREZ_LISTS="$DEV $LANGUAGE $ADMIN"
 for list in $WAREZ_LISTS;
 do
     $PACKAGE_MANAGER_INSTALL $(cat $list)

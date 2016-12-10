@@ -9,6 +9,10 @@ DIR=$(pwd)
 cd $DIR/scripts/
 /bin/bash install_software.sh
 /bin/bash setup_dotfiles.sh
+if [ -d $REMOTE_REPO_DIR ]
+then
+    rm -rf $REMOTE_REPO_DIR
+fi
 git clone https://github.com/AmirAlavi/amirs_remote_machines.git $REMOTE_REPO_DIR
 cd $REMOTE_REPO_DIR
 ./configure_ssh.sh
