@@ -135,3 +135,4 @@ export EDITOR="emacs -nw"
 # Aliases
 alias tmux='TERM=xterm-256color tmux'
 alias emacs='emacs -nw'
+alias gl='git log --pretty=oneline'
